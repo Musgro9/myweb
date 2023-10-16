@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-9NBM84408R"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+ 			gtag('config', 'G-9NBM84408R');
+		</script>
+		<link href="https://fonts.googleapis.com/css?family=Lilita+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link href="Style.css" type="text/css" rel="stylesheet">
+		
+		<title>Relocation Info</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="o-tax.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			$("#btn").click(function(e){
+			   var jsonData = {};
+			   
+			 var formData = $("#myform").serializeArray();
+			 console.log(formData);
+			 
+			 $.each(formData, function() {
+				  if (jsonData[this.name]) {
+					 if (!jsonData[this.name].push) {
+						 jsonData[this.name] = [jsonData[this.name]];
+					 }
+					 jsonData[this.name].push(this.value || '');
+				 } else {
+					 jsonData[this.name] = this.value || '';
+				 }
+					 
+				 
+			 });
+			 console.log(jsonData);
+			  $.ajax(
+			  {
+				  url : "INPUT.json",
+				  type: "POST",
+				  data : jsonData,
+				  
+			  });
+			  e.preventDefault();	
+		  });
+		  });
+		  </script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="container">
+					<li><a href="./index.html">Home</a></li>
+                    <li><a href="#middle">Relocate</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+
+		<!-- Header -->
+			<article id="top" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-5-large col-12-medium">
+							<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
+						</div>
+						<div class="col-8 col-7-large col-12-medium">
+                            <header>
+								<h1>
+                                    <h1><strong>Relocation Project</strong>.</h1>  
+                                </h1>
+							</header>
+							<p>This program allows you to input a yearly salary and a zip-code. It then will return the current averages of that zip-code.
+								It will also show how much you will pay in taxes in this location. It will also add in a few other things for the location like 
+							current local gas prices and more. Finally it will let you know how much money you will have left at the end of each month.</p>
+						</div>
+					</div>
+				</div>
+			</article>
+
+		<!-- Screen Shots -->
+			<article id="middle" class="wrapper style3">
+				<div class="container">
+					<header>
+						<div class="row">
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<form action="">
+									<label for="salary">Enter your yearly salary:</label>
+									<input type="text" id="salary" name="salary">
+									<br>
+									<label for="zip">Enter your 5 digit zip-code:</label>
+									<input type="text" id="zip" name="zip">
+									<br>
+									<button type="button" onclick="calculate()">Calculate</button>
+								  </form>
+								  			
+							</article>
+						</div>
+						<div class="col-8 col-10-medium col-12-small" style="display: flex; align-items: center;">
+							<p style="font-size: 24px; color: rgb(46, 46, 46); text-align: left; line-height: 1.5;"> 
+								This is just the Beta version. <br><br> You will notice the numbers will be off a little since
+								the 401K and the rest of the benefits are not include into this. <br><br>
+								There is an app currently being developed to access this information and more. 
+								The app will have more features along with more customization to give a 99% accuracy.</p>
+						</div>
+					</div>
+					</header>
+					<div class="row">
+						
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<div><strong>Before Tax Gross Income</strong></div>
+								<div id="output2"></div>								  			
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<div><strong>Taxes Paid</strong></div>
+								  <div id="output3"></div>
+								  <div id="output4"></div>				
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+									<div><strong>Bring Home After Tax</strong></div>
+								  <div id="result"></div>
+								  <div id="output"></div>				
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+									<div><strong>Average Rent in This Location</strong></div>
+								  <div id="output6"></div>
+								  <div id="output7"></div>
+								  <div id="output5"></div>				
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+									<div><strong>Average Gas in This Location</strong></div>
+								  <div id="output9"></div>
+								  <div id="output10"></div>	
+								  <div id="output11"></div>				
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+									<div><strong>Bring Home After Taxes, Rent, & Gas</strong></div>
+								  <div id="output1"></div>	
+								  <div id="output8"></div>			
+							</article>
+						</div>
+					</div>
+                <!-- Download -->    
+					<footer>
+						<p>If you are having any issues with the zip-code data please send an email and I will fix it as soon as possible.</p>
+					</footer>
+					<p></p>
+				</div>
+			</article>
+
+		<!-- Contact -->
+			<article id="contact" class="wrapper style4">
+				<div class="container medium">
+					<header>
+						<h2>Contact me.</h2>
+						<p>Send me an E-mail to get in touch with me about jobs or projects.</p>
+					</header>
+					<div class="row">
+						<div class="col-12">
+							<form action="https://formspree.io/f/mzbqbvgv" method="POST" id="my-form">
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<input type="text" name="name" id="name" placeholder="Name" />
+									</div>
+									<div class="col-6 col-12-small">
+										<input type="text" name="email" id="email" placeholder="Email" />
+									</div>
+									<div class="col-12">
+										<input type="text" name="subject" id="subject" placeholder="Subject" />
+									</div>
+									<div class="col-12">
+										<textarea name="message" id="message" placeholder="Message"></textarea>
+									</div>
+									<div class="col-12">
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" /></li>
+											<li><input type="reset" value="Clear Form" class="alt" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-12">
+							<hr />
+							<h3>Find me on ...</h3>
+							<ul class="social">
+								<li><a href="https://www.linkedin.com/in/kyle-musgrove1/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://github.com/Musgro9/" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							</ul>
+							<hr />
+						</div>
+					</div>
+					<footer>
+						<ul id="copyright">
+							<li>&copy; Untitled. All rights reserved.</li>
+						</ul>
+					</footer>
+				</div>
+			</article>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/myFun.js"></script>
+			<script src="assets/js/papaparse.min.js"></script>
+	</body>
+</html>
